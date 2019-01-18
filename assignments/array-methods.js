@@ -94,7 +94,7 @@ console.log(ticketPriceTotal);
 const listOfShirts = [...new Set(runners.map(e => e.shirt_size))];
 
 //create object with k:v pair for each shirt size, with starting values of 0
-const shirtsOrder = {}
+const shirtsOrder = {};
 listOfShirts.forEach(e => shirtsOrder[e] = 0);
 
 //increment each shirt size appropriately to tally how many shirts are needed in each size
@@ -110,10 +110,10 @@ console.log(JSON.stringify(shirtsOrder));
 
 //solution after refactoring necessary filter & map into a function
 //refactored donation threshold into parameterized callback function
-const donatedMinOf = (min) => e => e.donation >= min
+const donatedMinOf = min => e => e.donation >= min;
 
 //turned filter & map into function
-const fullNamesOfMinDonors = (min) => runners.filter(donatedMinOf(min)).map(e => `${e.first_name} ${e.last_name}`);
+const fullNamesOfMinDonors = min => runners.filter(donatedMinOf(min)).map(e => `${e.first_name} ${e.last_name}`);
 
 const donatedFiftyOrMore = fullNamesOfMinDonors(50);
 
