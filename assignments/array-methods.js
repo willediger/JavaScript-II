@@ -88,10 +88,10 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
-// Figure out how many of each shirt size need to be ordered. The result should be an object with the size as the key, and the number of shirts to be ordered as the value.
+// Figure out how many of each shirt size need to be ordered, and log the result. The result should be an object with the sizes as the keys, and the number of shirts to be ordered as the value.
 
 //get unique list of shirt sizes
-let listOfShirts = [...new Set(runners.map(e => e.shirt_size))];
+const listOfShirts = [...new Set(runners.map(e => e.shirt_size))];
 
 //create object with k:v pair for each shirt size, with starting values of 0
 const shirtsOrder = {}
@@ -103,5 +103,24 @@ runners.forEach(e => shirtsOrder[e.shirt_size]++);
 console.log(JSON.stringify(shirtsOrder));
 
 // Problem 2
+//Figure out which runners donated 50 or more. Log an array of their full names.
+
+//solution before realizing problem 3 was the same question with a different threshold
+// donatedFiftyOrMore = runners.filter(e => e.donation >= 50).map(e => `${e.first_name} ${e.last_name}`);
+
+//solution after refactoring necessary filter & map into a function
+//refactored donation threshold into parameterized callback function
+const donatedMinOf = (min) => e => e.donation >= min
+
+//turned filter & map into function
+const fullNamesOfMinDonors = (min) => runners.filter(donatedMinOf(min)).map(e => `${e.first_name} ${e.last_name}`);
+
+const donatedFiftyOrMore = fullNamesOfMinDonors(50);
+
+console.log(donatedFiftyOrMore);
 
 // Problem 3
+//Figure out which runners donated 100 or more. Log an array of their full names.
+
+const donatedOneHundredOrMore = fullNamesOfMinDonors(100);
+console.log(donatedOneHundredOrMore);
